@@ -108,7 +108,7 @@ export default function Hero() {
       </div>
 
       <div className="container-main">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
         <div className="max-w-3xl flex-1">
           {/* Status badge */}
           <motion.div
@@ -209,11 +209,11 @@ export default function Hero() {
             <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-orange-500/20 via-pink-500/20 to-purple-500/20 blur-xl" />
             <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-orange-500 via-pink-500 to-purple-500 opacity-60" />
             <div className="relative w-80 h-80 xl:w-96 xl:h-96 rounded-full overflow-hidden border-2 border-white/10">
-              {/* Replace src with your actual photo: /profile.jpg */}
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                src="/profile.jpg"
                 alt="Joshwa"
                 className="w-full h-full object-cover"
+                style={{ objectPosition: '60% 15%' }}
               />
             </div>
           </div>
