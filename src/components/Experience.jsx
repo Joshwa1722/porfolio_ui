@@ -13,7 +13,7 @@ const timeline = [
     desc: 'Built Hrone & Max Healthcare connector integrations for seamless data synchronization.',
   },
   {
-    year: '2023–24',
+    year: '2023-24',
     title: 'CRM Module Development',
     desc: 'Developed Manage User & Manage Plant modules with RBAC and dynamic forms.',
   },
@@ -29,33 +29,45 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="experience" className="py-20 md:py-28">
+    <section id="experience" className="py-24 md:py-32">
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
+          transition={{ duration: 0.6 }}
+          className="mb-14"
         >
-          <p className="text-sm font-medium text-blue-600 mb-2">Experience</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900">My journey</h2>
+          <p className="text-sm font-medium text-orange-400 mb-3 tracking-wider uppercase">Experience</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">My journey</h2>
+          <div className="section-line" />
         </motion.div>
 
-        <div className="max-w-2xl">
+        <div className="max-w-2xl relative">
+          {/* Timeline gradient line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-orange-500/40 via-pink-500/40 to-purple-500/40 rounded-full" />
+
           {timeline.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="relative pl-8 pb-8 last:pb-0 border-l-2 border-slate-100 last:border-transparent"
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              className="relative pl-10 pb-10 last:pb-0 group"
             >
-              {/* Dot */}
-              <div className="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-blue-600" />
+              {/* Glowing dot */}
+              <div className="absolute left-0 top-1.5">
+                <div className="w-4 h-4 rounded-full bg-black border-2 border-orange-500/50 group-hover:border-orange-400 transition-colors relative">
+                  <div className="absolute inset-0 rounded-full bg-orange-500/20 animate-ping" style={{ animationDuration: '3s' }} />
+                </div>
+              </div>
 
-              <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{item.year}</span>
-              <h3 className="font-semibold text-slate-900 mt-2 mb-1">{item.title}</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
+              <div className="glass rounded-xl p-5 glow-card">
+                <span className="inline-block text-xs font-mono font-medium text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-md mb-3">
+                  {item.year}
+                </span>
+                <h3 className="font-semibold text-white mb-1.5 text-lg">{item.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

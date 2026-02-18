@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -23,50 +23,79 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm' : 'bg-transparent'
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'glass-strong shadow-lg shadow-black/30'
+          : 'bg-transparent'
       }`}
     >
-      <div className="container-main flex items-center justify-between h-16">
-        <a href="#home" className="font-heading text-xl font-bold text-slate-900">
-          Joshwa<span className="text-blue-600">.</span>
+      <div className="container-main flex items-center justify-between h-16 md:h-18">
+        <a href="#home" className="font-heading text-xl font-bold text-white">
+          Joshwa<span className="gradient-text">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              className="relative text-sm text-slate-400 hover:text-white transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-orange-500 after:to-pink-500 after:transition-all after:duration-300 hover:after:w-full"
+            >
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="text-sm font-medium text-white bg-blue-600 px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <a
+            href="#contact"
+            className="text-sm font-medium text-white px-5 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/25"
+          >
             Hire Me
           </a>
         </div>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden p-2 cursor-pointer" aria-label="Menu">
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden p-2 cursor-pointer"
+          aria-label="Menu"
+        >
           <div className="space-y-1.5">
-            <span className={`block w-5 h-0.5 bg-slate-700 transition-all ${open ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-slate-700 transition-all ${open ? 'opacity-0' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-slate-700 transition-all ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-slate-300 transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-slate-300 transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-slate-300 transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
           </div>
         </button>
       </div>
 
-      {open && (
-        <div className="md:hidden bg-white border-t border-slate-100 py-4">
-          <div className="container-main flex flex-col gap-3">
-            {links.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-sm text-slate-600 py-1.5">
-                {l.label}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden overflow-hidden glass-strong"
+          >
+            <div className="container-main flex flex-col gap-1 py-4">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-slate-400 hover:text-white py-2.5 px-3 rounded-lg hover:bg-white/[0.04] transition-all"
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 px-5 py-2.5 rounded-lg text-center mt-2"
+              >
+                Hire Me
               </a>
-            ))}
-            <a href="#contact" onClick={() => setOpen(false)} className="text-sm font-medium text-white bg-blue-600 px-5 py-2 rounded-lg text-center mt-2">
-              Hire Me
-            </a>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   )
 }
