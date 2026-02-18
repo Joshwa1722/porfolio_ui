@@ -159,7 +159,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-xl md:text-2xl text-slate-400 mb-2"
           >
-            Frontend Developer | React Specialist
+            Full Stack Developer | React Specialist
           </motion.p>
 
           {/* Typing effect */}

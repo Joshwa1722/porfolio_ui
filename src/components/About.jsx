@@ -62,8 +62,8 @@ export default function About() {
           </h2>
           <div className="section-line mb-6" />
           <p className="text-slate-400 leading-relaxed max-w-2xl text-lg">
-            I'm a passionate Frontend Developer with hands-on experience building modern web applications
-            using React.js. I specialize in creating intuitive interfaces, integrating RESTful APIs,
+            I'm a passionate Full Stack Developer with hands-on experience building modern web applications
+            using React.js and Node.js. I specialize in creating intuitive interfaces, building RESTful APIs,
             and developing scalable CRM modules and third-party connectors.
           </p>
         </motion.div>
