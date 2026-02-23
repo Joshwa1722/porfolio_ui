@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:client && npm run build:server && npm run build:worker",
+    "build:client": "vite build",
+    "build:server": "vite build --ssr src/entry-server.jsx",
+    "build:worker": "node scripts/build-worker.js",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,7 +20,9 @@
     "@tailwindcss/vite": "^4.1.18",
     "@vitejs/plugin-react": "^5.1.4",
     "autoprefixer": "^10.4.24",
+    "esbuild": "^0.27.3",
     "tailwindcss": "^4.1.18",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "wrangler": "^4.67.0"
   }
 }

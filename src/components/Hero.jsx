@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsSSR } from '../context/SSRContext'
 
 const skills = ['React.js', 'JavaScript', 'API Integration', 'AI & NLQ', 'UI/UX Design']
 
@@ -49,6 +50,7 @@ const floatingIcons = [
 ]
 
 export default function Hero() {
+  const isSSR = useIsSSR()
   const [views, setViews] = useState(null)
   const [displayText, setDisplayText] = useState('')
   const [skillIndex, setSkillIndex] = useState(0)
@@ -112,7 +114,7 @@ export default function Hero() {
         <div className="max-w-3xl flex-1">
           {/* Status badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={isSSR ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="flex items-center gap-3 mb-8"
@@ -143,7 +145,7 @@ export default function Hero() {
 
           {/* Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-4"
@@ -154,7 +156,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-xl md:text-2xl text-slate-400 mb-2"
@@ -164,7 +166,7 @@ export default function Hero() {
 
           {/* Typing effect */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="mb-10"
@@ -177,7 +179,7 @@ export default function Hero() {
 
           {/* CTA buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
             className="flex flex-wrap gap-4"
@@ -199,7 +201,7 @@ export default function Hero() {
 
         {/* Profile image */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={isSSR ? false : { opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="hidden lg:flex flex-shrink-0"

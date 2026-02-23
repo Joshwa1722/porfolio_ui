@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useIsSSR } from '../context/SSRContext'
 
 const projects = [
   {
@@ -48,6 +49,7 @@ const accentMap = {
 }
 
 export default function Projects() {
+  const isSSR = useIsSSR()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -55,7 +57,7 @@ export default function Projects() {
     <section id="projects" className="py-24 md:py-32">
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={isSSR ? false : { opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-14"
@@ -71,7 +73,7 @@ export default function Projects() {
             return (
               <motion.div
                 key={p.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={isSSR ? false : { opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="glass rounded-2xl overflow-hidden glow-card group"

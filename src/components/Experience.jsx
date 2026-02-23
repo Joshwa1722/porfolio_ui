@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useIsSSR } from '../context/SSRContext'
 
 const timeline = [
   {
@@ -25,6 +26,7 @@ const timeline = [
 ]
 
 export default function Experience() {
+  const isSSR = useIsSSR()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -32,7 +34,7 @@ export default function Experience() {
     <section id="experience" className="py-24 md:py-32">
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={isSSR ? false : { opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-14"
@@ -49,7 +51,7 @@ export default function Experience() {
           {timeline.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -30 }}
+              initial={isSSR ? false : { opacity: 0, x: -30 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className="relative pl-10 pb-10 last:pb-0 group"

@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import { useIsSSR } from '../context/SSRContext'
 
 const groups = [
   {
@@ -60,6 +61,7 @@ function TiltCard({ children, className }) {
 }
 
 export default function Skills() {
+  const isSSR = useIsSSR()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -67,7 +69,7 @@ export default function Skills() {
     <section id="skills" className="py-24 md:py-32">
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={isSSR ? false : { opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-14"
@@ -83,7 +85,7 @@ export default function Skills() {
             return (
               <motion.div
                 key={group.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={isSSR ? false : { opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >

@@ -1,7 +1,9 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import { useIsSSR } from '../context/SSRContext'
 
 export default function Contact() {
+  const isSSR = useIsSSR()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [submitted, setSubmitted] = useState(false)
@@ -16,7 +18,7 @@ export default function Contact() {
     <section id="contact" className="py-24 md:py-32">
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={isSSR ? false : { opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-14"
@@ -30,7 +32,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl">
           {/* Form */}
           <motion.form
-            initial={{ opacity: 0, y: 30 }}
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             onSubmit={handleSubmit}
@@ -70,7 +72,7 @@ export default function Contact() {
 
           {/* Info */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"

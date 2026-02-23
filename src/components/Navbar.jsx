@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsSSR } from '../context/SSRContext'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -10,6 +11,7 @@ const links = [
 ]
 
 export default function Navbar() {
+  const isSSR = useIsSSR()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -21,7 +23,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -80 }}
+      initial={isSSR ? false : { y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
