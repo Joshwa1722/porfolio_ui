@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsSSR } from '../context/SSRContext'
+import ThemeToggle from './ThemeToggle'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -33,8 +34,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container-main flex items-center justify-between h-16 md:h-18">
-        <a href="#home" className="font-heading text-xl font-bold text-white">
-          Joshwa<span className="gradient-text">.</span>
+        <a href="#home" className="font-heading text-xl font-bold text-[var(--text-heading)]">
+          Joshwa<span className="gradient-text text-2xl">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -42,14 +43,15 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="relative text-sm text-slate-400 hover:text-white transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-orange-500 after:to-pink-500 after:transition-all after:duration-300 hover:after:w-full"
+              className="relative text-sm text-[var(--text-body)] hover:text-[var(--text-heading)] transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-orange-500 after:to-pink-500 after:transition-all after:duration-300 hover:after:w-full"
             >
               {l.label}
             </a>
           ))}
+          <ThemeToggle />
           <a
             href="#contact"
-            className="text-sm font-medium text-white px-5 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/25"
+            className="text-sm font-semibold text-white px-5 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 transition-all duration-300 shadow-md shadow-orange-500/15 hover:shadow-lg hover:shadow-orange-500/25"
           >
             Hire Me
           </a>
@@ -61,12 +63,17 @@ export default function Navbar() {
           aria-label="Menu"
         >
           <div className="space-y-1.5">
-            <span className={`block w-5 h-0.5 bg-slate-300 transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-slate-300 transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-slate-300 transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-[var(--text-subtle)] transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-[var(--text-subtle)] transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-[var(--text-subtle)] transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
           </div>
         </button>
       </div>
+
+      {/* Gradient bottom line when scrolled */}
+      {scrolled && (
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
+      )}
 
       <AnimatePresence>
         {open && (
@@ -82,11 +89,14 @@ export default function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm text-slate-400 hover:text-white py-2.5 px-3 rounded-lg hover:bg-white/[0.04] transition-all"
+                  className="text-sm text-[var(--text-body)] hover:text-[var(--text-heading)] py-2.5 px-3 rounded-lg hover:bg-[var(--hover-bg)] transition-all"
                 >
                   {l.label}
                 </a>
               ))}
+              <div className="flex items-center gap-3 px-3 py-2">
+                <ThemeToggle />
+              </div>
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}

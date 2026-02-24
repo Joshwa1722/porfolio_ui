@@ -15,7 +15,10 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-32">
+    <section id="contact" className="py-24 md:py-32 relative">
+      {/* Decorative orb */}
+      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full bg-orange-500/[0.03] blur-[100px] pointer-events-none" />
+
       <div className="container-main" ref={ref}>
         <motion.div
           initial={isSSR ? false : { opacity: 0, y: 30 }}
@@ -24,9 +27,9 @@ export default function Contact() {
           className="mb-14"
         >
           <p className="text-sm font-medium text-orange-400 mb-3 tracking-wider uppercase">Contact</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">Get in touch</h2>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-heading)] mb-2">Get in touch</h2>
           <div className="section-line mb-4" />
-          <p className="text-slate-400 max-w-md text-lg">Have a project in mind? Let's work together.</p>
+          <p className="text-[var(--text-body)] max-w-md text-lg">Have a project in mind? Let's work together.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl">
@@ -42,28 +45,28 @@ export default function Contact() {
               type="text"
               required
               placeholder="Name"
-              className="w-full px-5 py-3.5 rounded-xl glass text-white placeholder-slate-500 outline-none input-glow"
+              className="w-full px-5 py-3.5 rounded-xl glass text-[var(--text-heading)] placeholder-[var(--text-muted)] outline-none input-glow"
             />
             <input
               type="email"
               required
               placeholder="Email"
-              className="w-full px-5 py-3.5 rounded-xl glass text-white placeholder-slate-500 outline-none input-glow"
+              className="w-full px-5 py-3.5 rounded-xl glass text-[var(--text-heading)] placeholder-[var(--text-muted)] outline-none input-glow"
             />
             <textarea
               required
               rows={4}
               placeholder="Message"
-              className="w-full px-5 py-3.5 rounded-xl glass text-white placeholder-slate-500 outline-none input-glow resize-none"
+              className="w-full px-5 py-3.5 rounded-xl glass text-[var(--text-heading)] placeholder-[var(--text-muted)] outline-none input-glow resize-none"
             />
             <motion.button
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`w-full py-3.5 text-sm font-medium text-white rounded-xl cursor-pointer transition-all duration-500 ${
+              className={`w-full py-4 text-sm font-semibold text-white rounded-xl cursor-pointer transition-all duration-500 ${
                 submitted
                   ? 'bg-green-600 shadow-lg shadow-green-500/25'
-                  : 'bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 hover:shadow-lg hover:shadow-orange-500/25'
+                  : 'bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 shadow-lg shadow-orange-500/15 hover:shadow-xl hover:shadow-orange-500/25'
               }`}
             >
               {submitted ? 'Sent!' : 'Send Message'}
@@ -77,37 +80,43 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-            <div className="glass rounded-xl p-5 glow-card">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                    <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
-                    <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white text-sm">Email</h3>
-                  <p className="text-sm text-slate-400">joshwa@example.com</p>
+            <div className="glass rounded-xl overflow-hidden glow-card">
+              <div className="h-1 bg-gradient-to-r from-orange-500 to-pink-500" />
+              <div className="p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500/15 to-pink-500/10 ring-1 ring-orange-500/10 flex items-center justify-center text-orange-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
+                      <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[var(--text-heading)] text-sm">Email</h3>
+                    <p className="text-sm text-[var(--text-body)]">joshwa@example.com</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="glass rounded-xl p-5 glow-card">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                    <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white text-sm">Location</h3>
-                  <p className="text-sm text-slate-400">India</p>
+            <div className="glass rounded-xl overflow-hidden glow-card">
+              <div className="h-1 bg-gradient-to-r from-pink-500 to-purple-500" />
+              <div className="p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500/15 to-purple-500/10 ring-1 ring-pink-500/10 flex items-center justify-center text-pink-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[var(--text-heading)] text-sm">Location</h3>
+                    <p className="text-sm text-[var(--text-body)]">India</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="font-semibold text-white mb-4 text-sm tracking-wider uppercase">Socials</h3>
+              <h3 className="font-semibold text-[var(--text-heading)] mb-4 text-sm tracking-wider uppercase">Socials</h3>
               <div className="flex gap-3">
                 {[
                   {
@@ -143,7 +152,7 @@ export default function Contact() {
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-12 h-12 rounded-xl glass flex items-center justify-center text-slate-400 hover:text-orange-400 hover:bg-white/[0.06] hover:border-orange-500/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/10"
+                    className="w-12 h-12 rounded-xl glass flex items-center justify-center text-[var(--text-body)] hover:text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/10"
                   >
                     {social.icon}
                   </a>
@@ -154,9 +163,10 @@ export default function Contact() {
         </div>
 
         {/* Footer */}
-        <div className="mt-24 pt-8 border-t border-white/[0.06] text-center">
-          <p className="text-sm text-slate-500">
-            Designed & built by <span className="text-slate-400">Joshwa</span> &mdash; {new Date().getFullYear()}
+        <div className="mt-24 pt-8 text-center">
+          <div className="w-48 h-[1px] mx-auto mb-8 bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
+          <p className="text-sm text-[var(--text-muted)]">
+            Designed & built by <span className="gradient-text font-medium">Joshwa</span> &mdash; {new Date().getFullYear()}
           </p>
         </div>
       </div>

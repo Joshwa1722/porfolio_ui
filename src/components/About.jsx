@@ -50,7 +50,10 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-24 md:py-32">
+    <section id="about" className="py-24 md:py-32 relative">
+      {/* Decorative orb */}
+      <div className="absolute top-1/4 -right-32 w-[400px] h-[400px] rounded-full bg-orange-500/[0.03] blur-[100px] pointer-events-none" />
+
       <div className="container-main" ref={ref}>
         <motion.div
           initial={isSSR ? false : { opacity: 0, y: 30 }}
@@ -59,11 +62,11 @@ export default function About() {
           className="mb-14"
         >
           <p className="text-sm font-medium text-orange-400 mb-3 tracking-wider uppercase">About</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-heading)] mb-2">
             A bit about me
           </h2>
           <div className="section-line mb-6" />
-          <p className="text-slate-400 leading-relaxed max-w-2xl text-lg">
+          <p className="text-[var(--text-body)] leading-relaxed max-w-2xl text-lg">
             I'm a passionate Full Stack Developer with hands-on experience building modern web applications
             using React.js and Node.js. I specialize in creating intuitive interfaces, building RESTful APIs,
             and developing scalable CRM modules and third-party connectors.
@@ -77,13 +80,16 @@ export default function About() {
               initial={isSSR ? false : { opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass rounded-2xl p-6 glow-card cursor-default group"
+              className="glass rounded-2xl overflow-hidden glow-card cursor-default group"
             >
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 mb-4 group-hover:bg-orange-500/20 group-hover:text-orange-300 transition-all">
-                {card.icon}
+              <div className="h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500" />
+              <div className="p-6">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/15 to-pink-500/10 ring-1 ring-orange-500/10 flex items-center justify-center text-orange-400 mb-4 group-hover:from-orange-500/25 group-hover:to-pink-500/15 group-hover:text-orange-300 transition-all">
+                  {card.icon}
+                </div>
+                <h3 className="font-semibold text-[var(--text-heading)] mb-2 text-lg">{card.title}</h3>
+                <p className="text-sm text-[var(--text-body)] leading-relaxed">{card.desc}</p>
               </div>
-              <h3 className="font-semibold text-white mb-2 text-lg">{card.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{card.desc}</p>
             </motion.div>
           ))}
         </div>

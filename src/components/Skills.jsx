@@ -31,9 +31,27 @@ const groups = [
 ]
 
 const colorMap = {
-  orange: { bg: 'bg-orange-500/10', text: 'text-orange-400', badge: 'bg-orange-500/10 text-orange-300' },
-  pink: { bg: 'bg-pink-500/10', text: 'text-pink-400', badge: 'bg-pink-500/10 text-pink-300' },
-  purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', badge: 'bg-purple-500/10 text-purple-300' },
+  orange: {
+    bg: 'bg-orange-500/10',
+    text: 'text-orange-400',
+    badge: 'bg-orange-500/10 text-orange-300',
+    border: 'border-orange-500/10',
+    bar: 'from-orange-500 to-pink-500',
+  },
+  pink: {
+    bg: 'bg-pink-500/10',
+    text: 'text-pink-400',
+    badge: 'bg-pink-500/10 text-pink-300',
+    border: 'border-pink-500/10',
+    bar: 'from-pink-500 to-purple-500',
+  },
+  purple: {
+    bg: 'bg-purple-500/10',
+    text: 'text-purple-400',
+    badge: 'bg-purple-500/10 text-purple-300',
+    border: 'border-purple-500/10',
+    bar: 'from-purple-500 to-orange-500',
+  },
 }
 
 function TiltCard({ children, className }) {
@@ -66,7 +84,10 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="skills" className="py-24 md:py-32">
+    <section id="skills" className="py-24 md:py-32 relative">
+      {/* Decorative orb */}
+      <div className="absolute top-1/3 -left-32 w-[400px] h-[400px] rounded-full bg-pink-500/[0.03] blur-[100px] pointer-events-none" />
+
       <div className="container-main" ref={ref}>
         <motion.div
           initial={isSSR ? false : { opacity: 0, y: 30 }}
@@ -75,7 +96,7 @@ export default function Skills() {
           className="mb-14"
         >
           <p className="text-sm font-medium text-orange-400 mb-3 tracking-wider uppercase">Skills</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">What I work with</h2>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-heading)] mb-2">What I work with</h2>
           <div className="section-line" />
         </motion.div>
 
@@ -89,19 +110,22 @@ export default function Skills() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
-                <TiltCard className="glass rounded-2xl p-6 glow-card h-full cursor-default">
-                  <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg ${colors.bg} mb-4`}>
-                    <span className={`text-sm font-semibold ${colors.text}`}>{group.title}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((s) => (
-                      <span
-                        key={s}
-                        className={`text-sm px-3 py-1.5 rounded-lg ${colors.badge} transition-all duration-300 hover:scale-105`}
-                      >
-                        {s}
-                      </span>
-                    ))}
+                <TiltCard className="glass rounded-2xl overflow-hidden glow-card h-full cursor-default">
+                  <div className={`h-1 bg-gradient-to-r ${colors.bar}`} />
+                  <div className="p-6">
+                    <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg ${colors.bg} mb-4`}>
+                      <span className={`text-sm font-semibold ${colors.text}`}>{group.title}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {group.skills.map((s) => (
+                        <span
+                          key={s}
+                          className={`text-sm px-3 py-1.5 rounded-lg border ${colors.badge} ${colors.border} transition-all duration-300 hover:scale-105`}
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </TiltCard>
               </motion.div>
