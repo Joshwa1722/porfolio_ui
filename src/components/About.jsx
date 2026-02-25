@@ -27,11 +27,11 @@ const highlights = [
     color: 'pink',
   },
   {
-    title: 'Award Winner',
-    desc: "Recognized with 'Bower Bird Award' for exceptional UI/UX aesthetics.",
+    title: 'Backend Dev',
+    desc: 'Building server-side applications and APIs with Node.js, Express.js & Python.',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-        <path d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-4.5A3.375 3.375 0 0 0 13.125 10.875h-2.25A3.375 3.375 0 0 0 7.5 14.25v4.5m6-12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     color: 'purple',
@@ -102,8 +102,8 @@ export default function About() {
             className="md:col-span-2 glass rounded-2xl p-8 glow-card gradient-border-animated"
           >
             <p className="text-[var(--text-body)] text-lg leading-relaxed">
-              I'm a passionate Frontend Developer with 1.6+ years of professional experience at Skillmine Technology,
-              specializing in building modern, responsive, and user-friendly applications with React, Remix & Vite.
+              I'm a Full Stack Developer currently focused on frontend at Skillmine Technology, with 2+ years of
+              professional experience building modern, responsive applications with React, Remix & Vite.
               I lead production bug fixes, feature development, and collaborate with design teams for pixel-perfect interfaces.
             </p>
             <div className="flex items-center gap-4 mt-6">

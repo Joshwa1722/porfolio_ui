@@ -46,20 +46,6 @@ export default function Hero() {
 
           {/* Left: Text content */}
           <div className="max-w-3xl flex-1 pt-8 lg:pt-16">
-            {/* Status badge */}
-            <motion.div
-              initial={isSSR ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 glass rounded-full px-5 py-2.5 mb-10"
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
-              </span>
-              <span className="text-sm text-[var(--text-body)]">Available for work</span>
-            </motion.div>
-
             {/* Main heading */}
             <motion.div
               initial={isSSR ? false : { opacity: 0, y: 30 }}
@@ -84,7 +70,7 @@ export default function Hero() {
             >
               <div className="w-12 h-[2px] bg-gradient-to-r from-orange-500 to-pink-500 rounded-full" />
               <p className="text-lg md:text-xl text-[var(--text-subtle)] font-light tracking-wide">
-                Frontend Developer at Skillmine Technology
+                Full Stack Developer | Currently focused on Frontend
               </p>
             </motion.div>
 

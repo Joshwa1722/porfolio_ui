@@ -4,7 +4,7 @@ import { useIsSSR } from '../context/SSRContext'
 
 const timeline = [
   {
-    year: '2024',
+    year: '2026',
     role: 'Frontend Developer',
     title: 'Skillmine Technology',
     desc: 'Leading production bug fixes and implementing new features using React Remix. Collaborating with design teams for pixel-perfect interfaces and managing GitLab repositories.',
