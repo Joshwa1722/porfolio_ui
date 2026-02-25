@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useIsSSR } from '../context/SSRContext'
+import { FADE_UP, FADE_UP_SLOW, FADE_IN, SECTION_TRANSITION, STAGGER_DELAY, CLS } from '../lib/constants'
 
 const projects = [
   {
@@ -54,26 +55,28 @@ const accentStyles = {
   },
 }
 
+const GITHUB_ICON = 'M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z'
+
 export default function Projects() {
   const isSSR = useIsSSR()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="projects" className="py-28 md:py-36 relative">
+    <section id="projects" className={CLS.sectionPadding}>
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={isSSR ? false : { opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={isSSR ? false : FADE_UP}
+          animate={inView ? FADE_IN : {}}
+          transition={SECTION_TRANSITION}
           className="mb-16"
         >
-          <span className="font-mono text-sm text-orange-400 tracking-wider">// projects</span>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-heading)] mt-3 mb-4">
+          <span className={CLS.sectionLabel}>// projects</span>
+          <h2 className={CLS.sectionHeading}>
             What I've<br />
             <span className="gradient-text">built</span>.
           </h2>
-          <div className="section-line" />
+          <div className={CLS.sectionLine} />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -83,39 +86,29 @@ export default function Projects() {
             return (
               <motion.div
                 key={p.title}
-                initial={isSSR ? false : { opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
+                initial={isSSR ? false : FADE_UP_SLOW}
+                animate={inView ? FADE_IN : {}}
+                transition={{ ...SECTION_TRANSITION, delay: STAGGER_DELAY(i, 0.12) }}
                 whileHover={{ y: -8 }}
-                className="glass rounded-2xl overflow-hidden glow-card gradient-border-animated group"
+                className={`${CLS.glassCard} overflow-hidden group`}
               >
-                {/* Image preview area */}
                 <div className="relative h-52 overflow-hidden">
                   <img
                     src={p.image}
                     alt={p.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-
-                  {/* Dark overlay for readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
-
-                  {/* Color tint overlay */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${styles.overlay} opacity-60`} />
-
-                  {/* Large number */}
                   <span className={`absolute bottom-3 right-5 text-8xl font-heading font-bold ${styles.num} select-none`}>
                     {num}
                   </span>
-
-                  {/* Top-left label */}
                   <div className="absolute top-4 left-5 flex items-center gap-2">
                     <div className={`w-2 h-2 rounded-full ${styles.dot}`} />
                     <span className="text-xs font-mono text-white/50 uppercase tracking-wider">Project {num}</span>
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="p-7">
                   <h3 className="font-heading font-bold text-xl text-[var(--text-heading)] mb-3 group-hover:text-orange-300 transition-colors duration-300">
                     {p.title}
@@ -136,7 +129,7 @@ export default function Projects() {
                       className="flex items-center gap-2 text-sm font-semibold text-white px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-500/80 to-pink-500/80 hover:from-orange-500 hover:to-pink-500 transition-all hover:shadow-lg hover:shadow-orange-500/20 cursor-pointer"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
+                        <path d={GITHUB_ICON} />
                       </svg>
                       GitHub
                     </a>

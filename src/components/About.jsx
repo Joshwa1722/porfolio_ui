@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useIsSSR } from '../context/SSRContext'
+import { SITE, FADE_UP, FADE_IN, SECTION_TRANSITION, ITEM_TRANSITION, STAGGER_DELAY, CLS } from '../lib/constants'
 
 const highlights = [
   {
@@ -75,48 +76,44 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-28 md:py-36 relative">
+    <section id="about" className={CLS.sectionPadding}>
       <div className="container-main" ref={ref}>
-        {/* Section header */}
         <motion.div
-          initial={isSSR ? false : { opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={isSSR ? false : FADE_UP}
+          animate={inView ? FADE_IN : {}}
+          transition={SECTION_TRANSITION}
           className="mb-16"
         >
-          <span className="font-mono text-sm text-orange-400 tracking-wider">// about</span>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-heading)] mt-3 mb-4">
+          <span className={CLS.sectionLabel}>// about</span>
+          <h2 className={CLS.sectionHeading}>
             A bit about<br />
             <span className="gradient-text">me</span>.
           </h2>
-          <div className="section-line" />
+          <div className={CLS.sectionLine} />
         </motion.div>
 
-        {/* Bento top row: Bio + Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          {/* Bio card - large */}
           <motion.div
-            initial={isSSR ? false : { opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-2 glass rounded-2xl p-8 glow-card gradient-border-animated"
+            initial={isSSR ? false : FADE_UP}
+            animate={inView ? FADE_IN : {}}
+            transition={{ ...ITEM_TRANSITION, delay: 0.1 }}
+            className={`md:col-span-2 ${CLS.glassCard} rounded-2xl p-8`}
           >
             <p className="text-[var(--text-body)] text-lg leading-relaxed">
-              I'm a Full Stack Developer currently focused on frontend at Skillmine Technology, with 2+ years of
+              I'm a {SITE.title} currently focused on frontend at Skillmine Technology, with 2+ years of
               professional experience building modern, responsive applications with React, Remix & Vite.
               I lead production bug fixes, feature development, and collaborate with design teams for pixel-perfect interfaces.
             </p>
             <div className="flex items-center gap-4 mt-6">
               <div className="w-8 h-[1px] bg-gradient-to-r from-orange-500 to-transparent" />
-              <span className="text-sm text-[var(--text-muted)] font-mono">Based in India</span>
+              <span className="text-sm text-[var(--text-muted)] font-mono">Based in {SITE.location}</span>
             </div>
           </motion.div>
 
-          {/* Stats card */}
           <motion.div
-            initial={isSSR ? false : { opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial={isSSR ? false : FADE_UP}
+            animate={inView ? FADE_IN : {}}
+            transition={{ ...ITEM_TRANSITION, delay: 0.2 }}
             className="glass rounded-2xl p-8 flex flex-col justify-center items-center text-center glow-card"
           >
             <span className="text-6xl font-heading font-bold gradient-text leading-none">2+</span>
@@ -128,17 +125,16 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Bento bottom row: 4 highlight cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {highlights.map((card, i) => {
             const colors = colorMap[card.color]
             return (
               <motion.div
                 key={card.title}
-                initial={isSSR ? false : { opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}
-                className={`glass rounded-2xl p-6 group cursor-default glow-card gradient-border-animated ${colors.hoverBorder}`}
+                initial={isSSR ? false : FADE_UP}
+                animate={inView ? FADE_IN : {}}
+                transition={{ ...ITEM_TRANSITION, delay: 0.3 + STAGGER_DELAY(i) }}
+                className={`${CLS.glassCard} rounded-2xl p-6 group cursor-default ${colors.hoverBorder}`}
               >
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${colors.iconBg} ring-1 ${colors.ring} flex items-center justify-center ${colors.iconText} mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {card.icon}

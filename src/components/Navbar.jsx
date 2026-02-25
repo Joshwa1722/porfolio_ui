@@ -2,14 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsSSR } from '../context/SSRContext'
 import ThemeToggle from './ThemeToggle'
-
-const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
-]
+import { NAV_LINKS } from '../lib/constants'
 
 export default function Navbar() {
   const isSSR = useIsSSR()
@@ -22,7 +15,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -39,16 +31,14 @@ export default function Navbar() {
         }`}
       >
         <div className="container-main flex items-center justify-between">
-          {/* Logo */}
           <a href="#home" className="font-heading text-2xl font-bold text-[var(--text-heading)] relative z-50">
             J<span className="gradient-text text-3xl font-extrabold">.</span>
           </a>
 
-          {/* Centered pill nav */}
           <div className={`hidden md:flex items-center gap-1 rounded-full px-2 py-1.5 transition-all duration-500 ${
             scrolled ? 'glass-strong shadow-lg shadow-black/20' : 'glass'
           }`}>
-            {links.map((l) => (
+            {NAV_LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
@@ -59,7 +49,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right side */}
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
             <a
@@ -70,7 +59,6 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile menu toggle */}
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 cursor-pointer relative z-50"
@@ -85,7 +73,6 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Full-screen mobile menu overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -95,12 +82,9 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 md:hidden"
           >
-            {/* Backdrop */}
             <div className="absolute inset-0 bg-[var(--bg-body)]/95 backdrop-blur-2xl" />
-
-            {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
-              {links.map((l, i) => (
+              {NAV_LINKS.map((l, i) => (
                 <motion.a
                   key={l.href}
                   href={l.href}
@@ -114,7 +98,6 @@ export default function Navbar() {
                   {l.label}
                 </motion.a>
               ))}
-
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

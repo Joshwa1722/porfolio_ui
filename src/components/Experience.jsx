@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useIsSSR } from '../context/SSRContext'
+import { FADE_UP, FADE_IN, SECTION_TRANSITION, ITEM_TRANSITION, STAGGER_DELAY, CLS } from '../lib/constants'
 
 const timeline = [
   {
@@ -39,41 +40,38 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="experience" className="py-28 md:py-36 relative">
+    <section id="experience" className={CLS.sectionPadding}>
       <div className="container-main" ref={ref}>
         <motion.div
-          initial={isSSR ? false : { opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={isSSR ? false : FADE_UP}
+          animate={inView ? FADE_IN : {}}
+          transition={SECTION_TRANSITION}
           className="mb-16"
         >
-          <span className="font-mono text-sm text-orange-400 tracking-wider">// experience</span>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-heading)] mt-3 mb-4">
+          <span className={CLS.sectionLabel}>// experience</span>
+          <h2 className={CLS.sectionHeading}>
             My<br />
             <span className="gradient-text">journey</span>.
           </h2>
-          <div className="section-line" />
+          <div className={CLS.sectionLine} />
         </motion.div>
 
-        {/* Editorial timeline */}
         <div className="max-w-4xl">
           {timeline.map((item, i) => (
             <motion.div
               key={i}
-              initial={isSSR ? false : { opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={isSSR ? false : FADE_UP}
+              animate={inView ? FADE_IN : {}}
+              transition={{ ...ITEM_TRANSITION, delay: STAGGER_DELAY(i, 0.1) }}
               className="group"
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 border-b border-[var(--border-subtle)] hover:bg-[var(--hover-bg)] transition-all duration-500 -mx-4 md:-mx-6 px-4 md:px-6 rounded-xl">
-                {/* Year - large decorative */}
                 <div className="md:col-span-3 flex items-start">
                   <span className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] opacity-15 group-hover:opacity-30 group-hover:text-orange-400 transition-all duration-500 leading-none select-none">
                     {item.year}
                   </span>
                 </div>
 
-                {/* Content */}
                 <div className="md:col-span-9">
                   <div className="flex items-center gap-3 mb-1">
                     <div className="w-2 h-2 rounded-full bg-orange-500 pulse-dot" />
