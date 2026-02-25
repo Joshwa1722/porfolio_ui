@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -9,18 +9,23 @@ import Experience from './components/Experience'
 import Contact from './components/Contact'
 
 function App() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const cursorRef = useRef(null)
   const [showTop, setShowTop] = useState(false)
 
   useEffect(() => {
-    const handleMouse = (e) => setMousePos({ x: e.clientX, y: e.clientY })
-    const handleScroll = () => setShowTop(window.scrollY > 500)
-    window.addEventListener('mousemove', handleMouse)
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('mousemove', handleMouse)
-      window.removeEventListener('scroll', handleScroll)
+    const el = cursorRef.current
+    if (!el) return
+    const handleMouse = (e) => {
+      el.style.transform = `translate(${e.clientX - 200}px, ${e.clientY - 200}px)`
     }
+    window.addEventListener('mousemove', handleMouse, { passive: true })
+    return () => window.removeEventListener('mousemove', handleMouse)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => setShowTop(window.scrollY > 500)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
@@ -28,12 +33,11 @@ function App() {
       <div className="gradient-bg" />
       <div className="noise-overlay" />
 
-      {/* Cursor glow */}
+      {/* Cursor glow — uses ref + transform, no re-renders */}
       <div
-        className="fixed w-[400px] h-[400px] rounded-full pointer-events-none z-0 hidden md:block transition-opacity duration-300"
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-0 hidden md:block will-change-transform"
         style={{
-          left: mousePos.x - 200,
-          top: mousePos.y - 200,
           background: 'radial-gradient(circle, rgba(249,115,22,0.06) 0%, rgba(236,72,153,0.03) 40%, transparent 70%)',
         }}
       />

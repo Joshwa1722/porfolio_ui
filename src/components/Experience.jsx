@@ -67,7 +67,7 @@ export default function Experience() {
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 border-b border-[var(--border-subtle)] hover:bg-[var(--hover-bg)] transition-all duration-500 -mx-4 md:-mx-6 px-4 md:px-6 rounded-xl">
                 <div className="md:col-span-3 flex items-start">
-                  <span className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] opacity-15 group-hover:opacity-30 group-hover:text-orange-400 transition-all duration-500 leading-none select-none">
+                  <span className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] opacity-15 group-hover:opacity-30 group-hover:text-orange-400 transition-all duration-500 leading-none select-none">
                     {item.year}
                   </span>
                 </div>

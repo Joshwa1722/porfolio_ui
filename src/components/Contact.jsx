@@ -35,7 +35,7 @@ export default function Contact() {
             transition={SECTION_TRANSITION}
           >
             <span className={CLS.sectionLabel}>// contact</span>
-            <h2 className="font-heading text-6xl md:text-7xl lg:text-8xl font-bold text-[var(--text-heading)] mt-3 leading-[0.95]">
+            <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[var(--text-heading)] mt-3 leading-[0.95]">
               Let's<br />
               <span className="gradient-text">Talk</span>.
             </h2>

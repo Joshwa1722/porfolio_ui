@@ -44,7 +44,7 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="skills" className={CLS.sectionPadding}>
+    <section id="skills" className={`${CLS.sectionPadding} overflow-hidden`}>
       <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-pink-500/[0.03] blur-[130px] pointer-events-none" />
 
       <div className="container-main" ref={ref}>

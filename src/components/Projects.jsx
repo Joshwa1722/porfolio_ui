@@ -97,10 +97,14 @@ export default function Projects() {
                     src={p.image}
                     alt={p.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={208}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
                   <div className={`absolute inset-0 bg-gradient-to-br ${styles.overlay} opacity-60`} />
-                  <span className={`absolute bottom-3 right-5 text-8xl font-heading font-bold ${styles.num} select-none`}>
+                  <span className={`absolute bottom-3 right-4 sm:right-5 text-6xl sm:text-8xl font-heading font-bold ${styles.num} select-none`}>
                     {num}
                   </span>
                   <div className="absolute top-4 left-5 flex items-center gap-2">
@@ -109,7 +113,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="p-7">
+                <div className="p-5 sm:p-7">
                   <h3 className="font-heading font-bold text-xl text-[var(--text-heading)] mb-3 group-hover:text-orange-300 transition-colors duration-300">
                     {p.title}
                   </h3>

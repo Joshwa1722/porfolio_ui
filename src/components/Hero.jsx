@@ -40,15 +40,39 @@ export default function Hero() {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/[0.04] rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container-main relative">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 lg:gap-8">
-          <div className="max-w-3xl flex-1 pt-8 lg:pt-16">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10 lg:gap-8">
+
+          {/* Mobile profile image */}
+          <motion.div
+            initial={isSSR ? false : { opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="flex lg:hidden justify-center pt-4"
+          >
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-orange-500/20 via-pink-500/15 to-purple-500/20 blur-xl" />
+              <div className="absolute -inset-[2px] rounded-full bg-gradient-to-br from-orange-500 via-pink-500 to-purple-500 opacity-50" />
+              <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden">
+                <img
+                  src="/profile.jpg"
+                  alt={SITE.name}
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: '60% 15%' }}
+                  width={144}
+                  height={144}
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="max-w-3xl flex-1 text-center lg:text-left pt-0 lg:pt-16">
             <motion.div
               initial={isSSR ? false : FADE_UP}
               animate={FADE_IN}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <p className="text-xl md:text-2xl text-[var(--text-body)] mb-3 font-light">Hey, I'm</p>
-              <h1 className="font-heading text-7xl sm:text-8xl md:text-[9rem] lg:text-[10rem] font-bold leading-[0.9] tracking-tight mb-2">
+              <p className="text-lg sm:text-xl md:text-2xl text-[var(--text-body)] mb-3 font-light">Hey, I'm</p>
+              <h1 className="font-heading text-5xl sm:text-7xl md:text-[9rem] lg:text-[10rem] font-bold leading-[0.9] tracking-tight mb-2">
                 <span className="gradient-text" style={{ filter: 'drop-shadow(0 0 40px rgba(249,115,22,0.2))' }}>
                   {SITE.name}
                 </span>
@@ -60,10 +84,10 @@ export default function Hero() {
               initial={isSSR ? false : FADE_UP}
               animate={FADE_IN}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className="flex items-center gap-5 mt-6 mb-4"
+              className="flex items-center justify-center lg:justify-start gap-3 sm:gap-5 mt-6 mb-4"
             >
-              <div className="w-12 h-[2px] bg-gradient-to-r from-orange-500 to-pink-500 rounded-full" />
-              <p className="text-lg md:text-xl text-[var(--text-subtle)] font-light tracking-wide">
+              <div className="w-8 sm:w-12 h-[2px] bg-gradient-to-r from-orange-500 to-pink-500 rounded-full shrink-0" />
+              <p className="text-sm sm:text-lg md:text-xl text-[var(--text-subtle)] font-light tracking-wide">
                 {SITE.title} | Currently focused on Frontend
               </p>
             </motion.div>
@@ -74,7 +98,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.45 }}
               className="mb-12"
             >
-              <span className="font-mono text-base text-orange-400/70">
+              <span className="font-mono text-sm sm:text-base text-orange-400/70">
                 &gt; {displayText}
               </span>
               <span className="typing-cursor" />
@@ -84,7 +108,7 @@ export default function Hero() {
               initial={isSSR ? false : FADE_UP}
               animate={FADE_IN}
               transition={{ duration: 0.7, delay: 0.55 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap justify-center lg:justify-start gap-4"
             >
               <a
                 href="#projects"
@@ -116,6 +140,9 @@ export default function Hero() {
                   alt={SITE.name}
                   className="w-full h-full object-cover"
                   style={{ objectPosition: '60% 15%' }}
+                  width={320}
+                  height={400}
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>

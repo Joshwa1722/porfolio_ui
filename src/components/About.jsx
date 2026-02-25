@@ -116,11 +116,11 @@ export default function About() {
             transition={{ ...ITEM_TRANSITION, delay: 0.2 }}
             className="glass rounded-2xl p-8 flex flex-col justify-center items-center text-center glow-card"
           >
-            <span className="text-6xl font-heading font-bold gradient-text leading-none">2+</span>
+            <span className="text-5xl sm:text-6xl font-heading font-bold gradient-text leading-none">2+</span>
             <span className="text-sm text-[var(--text-body)] mt-3">Years of</span>
             <span className="text-sm text-[var(--text-heading)] font-medium">Experience</span>
             <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent mt-4 mb-4" />
-            <span className="text-4xl font-heading font-bold gradient-text leading-none">10+</span>
+            <span className="text-3xl sm:text-4xl font-heading font-bold gradient-text leading-none">10+</span>
             <span className="text-sm text-[var(--text-body)] mt-2">Projects Built</span>
           </motion.div>
         </div>
