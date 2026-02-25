@@ -28,22 +28,19 @@ export default {
       const seoTags = getMetaTags()
       html = html.replace('<!--seo-head-->', seoTags)
 
-      const ua = request.headers.get('user-agent') || ''
-
-      if (isBot(ua)) {
-        // SSR for bots
-        try {
-          const appHtml = render()
-          html = html.replace('<!--ssr-outlet-->', appHtml)
-        } catch (e) {
-          // SSR failed — serve SPA as fallback (bot sees empty div, better than 500)
-          console.error('SSR render failed:', e)
-        }
+      // SSR for all users — instant FCP, React hydrates on client
+      try {
+        const appHtml = render()
+        html = html.replace('<!--ssr-outlet-->', appHtml)
+      } catch (e) {
+        // SSR failed — serve SPA as fallback
+        console.error('SSR render failed:', e)
       }
 
       return new Response(html, {
         headers: {
           'content-type': 'text/html;charset=UTF-8',
+          'cache-control': 'public, max-age=300, s-maxage=3600',
         },
       })
     } catch (e) {

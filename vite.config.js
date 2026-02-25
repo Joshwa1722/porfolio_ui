@@ -7,14 +7,6 @@ export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), tailwindcss()],
   build: {
     outDir: isSsrBuild ? 'dist/server' : 'dist/client',
-    rollupOptions: isSsrBuild ? {} : {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'framer-motion': ['framer-motion'],
-        },
-      },
-    },
   },
   resolve: {
     alias: isSsrBuild
