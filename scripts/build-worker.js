@@ -8,7 +8,18 @@ const root = path.resolve(__dirname, '..')
 
 // Read the HTML template and embed it in the worker
 const htmlPath = path.resolve(root, 'dist/client/index.html')
-const htmlTemplate = fs.readFileSync(htmlPath, 'utf-8')
+let htmlTemplate = fs.readFileSync(htmlPath, 'utf-8')
+
+// Inline the CSS into the HTML to eliminate the render-blocking stylesheet round trip.
+// This lets the browser paint immediately from a single response instead of waiting
+// for a second request to fetch the CSS file.
+const cssLinkMatch = htmlTemplate.match(/<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/)
+if (cssLinkMatch) {
+  const cssFilePath = path.resolve(root, 'dist/client', cssLinkMatch[1].replace(/^\//, ''))
+  const cssContent = fs.readFileSync(cssFilePath, 'utf-8')
+  htmlTemplate = htmlTemplate.replace(cssLinkMatch[0], `<style>${cssContent}</style>`)
+  console.log(`Inlined CSS (${(cssContent.length / 1024).toFixed(1)}KB) → eliminates render-blocking request`)
+}
 
 await build({
   entryPoints: [path.resolve(root, 'src/worker/index.js')],
