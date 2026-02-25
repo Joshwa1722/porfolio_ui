@@ -10,7 +10,13 @@
         (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
       document.documentElement.dataset.theme = t;
     </script>
+    <style>
+      body{margin:0;background:#000}
+      [data-theme="light"] body{background:#f8fafc}
+      #root{min-height:100vh}
+    </style>
     <!--seo-head-->
+    <link rel="preload" as="image" href="/profile.jpg" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400;500&display=swap" />

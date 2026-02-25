@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Contact from './components/Contact'
+
+const About = lazy(() => import('./components/About'))
+const Skills = lazy(() => import('./components/Skills'))
+const Projects = lazy(() => import('./components/Projects'))
+const Experience = lazy(() => import('./components/Experience'))
+const Contact = lazy(() => import('./components/Contact'))
 
 function App() {
   const cursorRef = useRef(null)
@@ -52,11 +53,13 @@ function App() {
       <Navbar />
       <main className="relative z-10">
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
+        <Suspense fallback={null}>
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Contact />
+        </Suspense>
       </main>
 
       {/* Back to top */}

@@ -60,6 +60,7 @@ export default function Hero() {
                   style={{ objectPosition: '60% 15%' }}
                   width={144}
                   height={144}
+                  fetchPriority="high"
                 />
               </div>
             </div>
@@ -142,7 +143,7 @@ export default function Hero() {
                   style={{ objectPosition: '60% 15%' }}
                   width={320}
                   height={400}
-                  decoding="async"
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>

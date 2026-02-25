@@ -7,7 +7,9 @@
       "WebFetch(domain:baskaran-portfolio.vercel.app)",
       "Bash(curl:*)",
       "WebSearch",
-      "WebFetch(domain:unsplash.com)"
+      "WebFetch(domain:unsplash.com)",
+      "Bash(echo no-image-tools:*)",
+      "Bash(cd:*)"
     ]
   }
 }
