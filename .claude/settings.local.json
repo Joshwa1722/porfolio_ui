@@ -5,7 +5,9 @@
       "Bash(npm:*)",
       "Bash(npx vite:*)",
       "WebFetch(domain:baskaran-portfolio.vercel.app)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)"
     ]
   }
 }

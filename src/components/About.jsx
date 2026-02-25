@@ -2,19 +2,20 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useIsSSR } from '../context/SSRContext'
 
-const cards = [
+const highlights = [
   {
     title: 'MCA Graduate',
-    desc: 'Strong foundation in computer applications & software engineering.',
+    desc: 'Master of Computer Application from Ayya Nadar Janaki Ammal College, MKU.',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
         <path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
+    color: 'orange',
   },
   {
-    title: 'React Developer',
-    desc: 'Building modern web apps with component-driven architecture.',
+    title: 'React & Remix',
+    desc: 'Building production apps with React Vite & Remix at Skillmine Technology.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
         <circle cx="12" cy="12" r="2.5" />
@@ -23,26 +24,50 @@ const cards = [
         <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
       </svg>
     ),
+    color: 'pink',
   },
   {
-    title: 'Connector Dev',
-    desc: 'Integrating third-party APIs like Hrone & Max Healthcare.',
+    title: 'Award Winner',
+    desc: "Recognized with 'Bower Bird Award' for exceptional UI/UX aesthetics.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-        <path d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-4.5A3.375 3.375 0 0 0 13.125 10.875h-2.25A3.375 3.375 0 0 0 7.5 14.25v4.5m6-12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
+    color: 'purple',
   },
   {
-    title: 'CRM Experience',
-    desc: 'Built Manage User & Manage Plant modules with RBAC.',
+    title: 'Production Lead',
+    desc: 'Leading production bug fixes and feature development in Agile sprints.',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-        <path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
+    color: 'orange',
   },
 ]
+
+const colorMap = {
+  orange: {
+    iconBg: 'from-orange-500/15 to-orange-500/5',
+    iconText: 'text-orange-400',
+    ring: 'ring-orange-500/15',
+    hoverBorder: 'group-hover:border-orange-500/30',
+  },
+  pink: {
+    iconBg: 'from-pink-500/15 to-pink-500/5',
+    iconText: 'text-pink-400',
+    ring: 'ring-pink-500/15',
+    hoverBorder: 'group-hover:border-pink-500/30',
+  },
+  purple: {
+    iconBg: 'from-purple-500/15 to-purple-500/5',
+    iconText: 'text-purple-400',
+    ring: 'ring-purple-500/15',
+    hoverBorder: 'group-hover:border-purple-500/30',
+  },
+}
 
 export default function About() {
   const isSSR = useIsSSR()
@@ -50,48 +75,79 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-24 md:py-32 relative">
-      {/* Decorative orb */}
-      <div className="absolute top-1/4 -right-32 w-[400px] h-[400px] rounded-full bg-orange-500/[0.03] blur-[100px] pointer-events-none" />
-
+    <section id="about" className="py-28 md:py-36 relative">
       <div className="container-main" ref={ref}>
+        {/* Section header */}
         <motion.div
           initial={isSSR ? false : { opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-14"
+          className="mb-16"
         >
-          <p className="text-sm font-medium text-orange-400 mb-3 tracking-wider uppercase">About</p>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-heading)] mb-2">
-            A bit about me
+          <span className="font-mono text-sm text-orange-400 tracking-wider">// about</span>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-heading)] mt-3 mb-4">
+            A bit about<br />
+            <span className="gradient-text">me</span>.
           </h2>
-          <div className="section-line mb-6" />
-          <p className="text-[var(--text-body)] leading-relaxed max-w-2xl text-lg">
-            I'm a passionate Full Stack Developer with hands-on experience building modern web applications
-            using React.js and Node.js. I specialize in creating intuitive interfaces, building RESTful APIs,
-            and developing scalable CRM modules and third-party connectors.
-          </p>
+          <div className="section-line" />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {cards.map((card, i) => (
-            <motion.div
-              key={card.title}
-              initial={isSSR ? false : { opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass rounded-2xl overflow-hidden glow-card cursor-default group"
-            >
-              <div className="h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500" />
-              <div className="p-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/15 to-pink-500/10 ring-1 ring-orange-500/10 flex items-center justify-center text-orange-400 mb-4 group-hover:from-orange-500/25 group-hover:to-pink-500/15 group-hover:text-orange-300 transition-all">
+        {/* Bento top row: Bio + Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          {/* Bio card - large */}
+          <motion.div
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="md:col-span-2 glass rounded-2xl p-8 glow-card gradient-border-animated"
+          >
+            <p className="text-[var(--text-body)] text-lg leading-relaxed">
+              I'm a passionate Frontend Developer with 1.6+ years of professional experience at Skillmine Technology,
+              specializing in building modern, responsive, and user-friendly applications with React, Remix & Vite.
+              I lead production bug fixes, feature development, and collaborate with design teams for pixel-perfect interfaces.
+            </p>
+            <div className="flex items-center gap-4 mt-6">
+              <div className="w-8 h-[1px] bg-gradient-to-r from-orange-500 to-transparent" />
+              <span className="text-sm text-[var(--text-muted)] font-mono">Based in India</span>
+            </div>
+          </motion.div>
+
+          {/* Stats card */}
+          <motion.div
+            initial={isSSR ? false : { opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="glass rounded-2xl p-8 flex flex-col justify-center items-center text-center glow-card"
+          >
+            <span className="text-6xl font-heading font-bold gradient-text leading-none">2+</span>
+            <span className="text-sm text-[var(--text-body)] mt-3">Years of</span>
+            <span className="text-sm text-[var(--text-heading)] font-medium">Experience</span>
+            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent mt-4 mb-4" />
+            <span className="text-4xl font-heading font-bold gradient-text leading-none">10+</span>
+            <span className="text-sm text-[var(--text-body)] mt-2">Projects Built</span>
+          </motion.div>
+        </div>
+
+        {/* Bento bottom row: 4 highlight cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {highlights.map((card, i) => {
+            const colors = colorMap[card.color]
+            return (
+              <motion.div
+                key={card.title}
+                initial={isSSR ? false : { opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}
+                className={`glass rounded-2xl p-6 group cursor-default glow-card gradient-border-animated ${colors.hoverBorder}`}
+              >
+                <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${colors.iconBg} ring-1 ${colors.ring} flex items-center justify-center ${colors.iconText} mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {card.icon}
                 </div>
-                <h3 className="font-semibold text-[var(--text-heading)] mb-2 text-lg">{card.title}</h3>
+                <h3 className="font-semibold text-[var(--text-heading)] mb-1.5">{card.title}</h3>
                 <p className="text-sm text-[var(--text-body)] leading-relaxed">{card.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

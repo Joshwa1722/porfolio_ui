@@ -5,23 +5,31 @@ import { useIsSSR } from '../context/SSRContext'
 const timeline = [
   {
     year: '2024',
-    title: 'NLQ & AI Integration',
-    desc: 'Integrated NLQ with AI-powered loader for intelligent data retrieval in enterprise apps.',
+    role: 'Frontend Developer',
+    title: 'Skillmine Technology',
+    desc: 'Leading production bug fixes and implementing new features using React Remix. Collaborating with design teams for pixel-perfect interfaces and managing GitLab repositories.',
+    tags: ['React', 'Remix', 'Production', 'GitLab'],
   },
   {
     year: '2024',
-    title: 'Connector Development',
-    desc: 'Built Hrone & Max Healthcare connector integrations for seamless data synchronization.',
+    role: 'Trainee',
+    title: 'Skillmine Technology',
+    desc: 'Developed core frontend modules using React Vite. Created reusable UI components reducing development time by 15%. Participated in Agile sprint planning.',
+    tags: ['React Vite', 'Agile', 'API', 'Postman'],
   },
   {
-    year: '2023-24',
-    title: 'CRM Module Development',
-    desc: 'Developed Manage User & Manage Plant modules with RBAC and dynamic forms.',
+    year: '2022',
+    role: 'Student',
+    title: 'Master of Computer Application',
+    desc: 'Ayya Nadar Janaki Ammal College (Autonomous), affiliated to Madurai Kamaraj University. CGPA: 7.1',
+    tags: ['MCA', 'Computer Science'],
   },
   {
-    year: '2023',
-    title: 'Learning & MCA',
-    desc: 'Completed MCA and gained hands-on experience with React, APIs, and frontend development.',
+    year: '2022',
+    role: 'Graduate',
+    title: 'Bachelor of Computer Application',
+    desc: 'Ayya Nadar Janaki Ammal College (Autonomous), affiliated to Madurai Kamaraj University. CGPA: 7.2',
+    tags: ['BCA', 'Foundations'],
   },
 ]
 
@@ -31,49 +39,62 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="experience" className="py-24 md:py-32 relative">
-      {/* Decorative orb */}
-      <div className="absolute top-1/3 -right-32 w-[400px] h-[400px] rounded-full bg-pink-500/[0.03] blur-[100px] pointer-events-none" />
-
+    <section id="experience" className="py-28 md:py-36 relative">
       <div className="container-main" ref={ref}>
         <motion.div
           initial={isSSR ? false : { opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-14"
+          className="mb-16"
         >
-          <p className="text-sm font-medium text-orange-400 mb-3 tracking-wider uppercase">Experience</p>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-heading)] mb-2">My journey</h2>
+          <span className="font-mono text-sm text-orange-400 tracking-wider">// experience</span>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-heading)] mt-3 mb-4">
+            My<br />
+            <span className="gradient-text">journey</span>.
+          </h2>
           <div className="section-line" />
         </motion.div>
 
-        <div className="max-w-2xl relative">
-          {/* Timeline gradient line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-[3px] bg-gradient-to-b from-orange-500/55 via-pink-500/55 to-purple-500/55 rounded-full" />
-
+        {/* Editorial timeline */}
+        <div className="max-w-4xl">
           {timeline.map((item, i) => (
             <motion.div
               key={i}
-              initial={isSSR ? false : { opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="relative pl-10 pb-10 last:pb-0 group"
+              initial={isSSR ? false : { opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group"
             >
-              {/* Glowing dot */}
-              <div className="absolute left-0 top-1.5">
-                <div className="w-4 h-4 rounded-full bg-[var(--bg-body)] border-2 border-orange-500/70 group-hover:border-orange-400 group-hover:shadow-[0_0_12px_rgba(249,115,22,0.4)] transition-all relative">
-                  <div className="absolute inset-0 rounded-full bg-orange-500/20 animate-ping" style={{ animationDuration: '3s' }} />
-                </div>
-              </div>
-
-              <div className="glass rounded-xl overflow-hidden glow-card">
-                <div className="h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500" />
-                <div className="p-5">
-                  <span className="inline-block text-xs font-mono font-medium text-orange-400 bg-orange-500/10 px-3 py-1 rounded-md mb-3 border-l-2 border-orange-500/50">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 border-b border-[var(--border-subtle)] hover:bg-[var(--hover-bg)] transition-all duration-500 -mx-4 md:-mx-6 px-4 md:px-6 rounded-xl">
+                {/* Year - large decorative */}
+                <div className="md:col-span-3 flex items-start">
+                  <span className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] opacity-15 group-hover:opacity-30 group-hover:text-orange-400 transition-all duration-500 leading-none select-none">
                     {item.year}
                   </span>
-                  <h3 className="font-semibold text-[var(--text-heading)] mb-1.5 text-lg">{item.title}</h3>
-                  <p className="text-sm text-[var(--text-body)] leading-relaxed">{item.desc}</p>
+                </div>
+
+                {/* Content */}
+                <div className="md:col-span-9">
+                  <div className="flex items-center gap-3 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-orange-500 pulse-dot" />
+                    <h3 className="font-heading font-bold text-xl text-[var(--text-heading)] group-hover:text-orange-300 transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-orange-400/60 font-mono ml-5 mb-3">{item.role}</p>
+                  <p className="text-[var(--text-body)] leading-relaxed mb-4 ml-5">
+                    {item.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2 ml-5">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs font-mono px-3 py-1 rounded-full bg-orange-500/8 text-orange-400/70 border border-orange-500/10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

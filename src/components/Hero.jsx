@@ -2,52 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useIsSSR } from '../context/SSRContext'
 
-const skills = ['React.js', 'JavaScript', 'API Integration', 'AI & NLQ', 'UI/UX Design']
-
-const floatingIcons = [
-  {
-    label: 'React',
-    svg: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-        <circle cx="12" cy="12" r="2.5" />
-        <ellipse cx="12" cy="12" rx="10" ry="4" />
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
-      </svg>
-    ),
-    style: { top: '15%', right: '10%' },
-    duration: 6,
-    delay: 0,
-  },
-  {
-    label: 'JS',
-    svg: <span className="font-mono font-bold text-lg">JS</span>,
-    style: { top: '55%', right: '5%' },
-    duration: 7,
-    delay: 1,
-  },
-  {
-    label: 'API',
-    svg: <span className="font-mono font-bold text-base">{'{ }'}</span>,
-    style: { top: '35%', right: '18%' },
-    duration: 5,
-    delay: 0.5,
-  },
-  {
-    label: 'AI',
-    svg: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-        <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Z" />
-        <path d="M8 14s-4 2-4 6h16c0-4-4-6-4-6" />
-        <circle cx="9" cy="7" r="0.5" fill="currentColor" />
-        <circle cx="15" cy="7" r="0.5" fill="currentColor" />
-      </svg>
-    ),
-    style: { top: '70%', right: '15%' },
-    duration: 8,
-    delay: 1.5,
-  },
-]
+const skills = ['React & Remix', 'JavaScript (ES6+)', 'REST API Integration', 'NLQ & AI', 'Pixel-Perfect UI']
 
 export default function Hero() {
   const isSSR = useIsSSR()
@@ -79,109 +34,142 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Floating tech icons */}
-      <div className="hidden lg:block">
-        {floatingIcons.map((icon) => (
-          <motion.div
-            key={icon.label}
-            className="absolute text-orange-400/30"
-            style={icon.style}
-            animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
-            transition={{
-              duration: icon.duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: icon.delay,
-            }}
-          >
-            <div className="glass rounded-2xl p-4 hover:text-orange-400/50 hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/10 transition-all duration-300">
-              {icon.svg}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 grid-pattern opacity-50" />
 
-      <div className="container-main">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-        <div className="max-w-3xl flex-1">
-          {/* Heading */}
-          <motion.h1
-            initial={isSSR ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-4 text-[var(--text-heading)]"
-          >
-            Hi, I'm{' '}
-            <span className="gradient-text" style={{ filter: 'drop-shadow(0 0 30px rgba(249,115,22,0.3))' }}>Joshwa</span>
-          </motion.h1>
+      {/* Hero gradient accent */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-orange-500/[0.04] rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/[0.04] rounded-full blur-[150px] pointer-events-none" />
 
-          {/* Subtitle */}
-          <motion.p
-            initial={isSSR ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-xl md:text-2xl lg:text-3xl font-light text-[var(--text-subtle)] mb-2"
-          >
-            Full Stack Developer | React Specialist
-          </motion.p>
+      <div className="container-main relative">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 lg:gap-8">
 
-          {/* Typing effect */}
-          <motion.div
-            initial={isSSR ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mb-10"
-          >
-            <span className="font-mono text-lg text-orange-400/80">
-              {displayText}
-            </span>
-            <span className="typing-cursor" />
-          </motion.div>
-
-          {/* CTA buttons */}
-          <motion.div
-            initial={isSSR ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-wrap gap-4"
-          >
-            <a
-              href="#projects"
-              className="px-10 py-4 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 transition-all duration-300 shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/25 hover:scale-105"
+          {/* Left: Text content */}
+          <div className="max-w-3xl flex-1 pt-8 lg:pt-16">
+            {/* Status badge */}
+            <motion.div
+              initial={isSSR ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2.5 glass rounded-full px-5 py-2.5 mb-10"
             >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="px-10 py-4 text-sm font-medium text-[var(--text-subtle)] rounded-xl glass hover:bg-[var(--surface-bg)] hover:text-[var(--text-heading)] hover:border-orange-500/30 hover:shadow-lg transition-all duration-300 hover:scale-105"
-            >
-              Contact Me
-            </a>
-          </motion.div>
-        </div>
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
+              </span>
+              <span className="text-sm text-[var(--text-body)]">Available for work</span>
+            </motion.div>
 
-        {/* Profile image */}
-        <motion.div
-          initial={isSSR ? false : { opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="hidden lg:flex flex-shrink-0"
-        >
-          <div className="relative">
-            {/* Glow ring behind image */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-orange-500/30 via-pink-500/30 to-purple-500/30 blur-xl animate-pulse" style={{ animationDuration: '4s' }} />
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-orange-500 via-pink-500 to-purple-500 opacity-60" />
-            <div className="relative w-80 h-80 xl:w-96 xl:h-96 rounded-full overflow-hidden border-2 border-[var(--border-subtle)]">
-              <img
-                src="/profile.jpg"
-                alt="Joshwa"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: '60% 15%' }}
-              />
-            </div>
+            {/* Main heading */}
+            <motion.div
+              initial={isSSR ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              <p className="text-xl md:text-2xl text-[var(--text-body)] mb-3 font-light">Hey, I'm</p>
+              <h1 className="font-heading text-7xl sm:text-8xl md:text-[9rem] lg:text-[10rem] font-bold leading-[0.9] tracking-tight mb-2">
+                <span className="gradient-text" style={{ filter: 'drop-shadow(0 0 40px rgba(249,115,22,0.2))' }}>
+                  Joshwa
+                </span>
+                <span className="gradient-text">.</span>
+              </h1>
+            </motion.div>
+
+            {/* Subtitle line with accent */}
+            <motion.div
+              initial={isSSR ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
+              className="flex items-center gap-5 mt-6 mb-4"
+            >
+              <div className="w-12 h-[2px] bg-gradient-to-r from-orange-500 to-pink-500 rounded-full" />
+              <p className="text-lg md:text-xl text-[var(--text-subtle)] font-light tracking-wide">
+                Frontend Developer at Skillmine Technology
+              </p>
+            </motion.div>
+
+            {/* Typing effect */}
+            <motion.div
+              initial={isSSR ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="mb-12"
+            >
+              <span className="font-mono text-base text-orange-400/70">
+                &gt; {displayText}
+              </span>
+              <span className="typing-cursor" />
+            </motion.div>
+
+            {/* CTA buttons */}
+            <motion.div
+              initial={isSSR ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="flex flex-wrap gap-4"
+            >
+              <a
+                href="#projects"
+                className="group flex items-center gap-3 px-8 py-4 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 transition-all duration-300 shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105"
+              >
+                View Projects
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                  <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
+                </svg>
+              </a>
+              <a
+                href="#contact"
+                className="px-8 py-4 text-sm font-medium text-[var(--text-subtle)] rounded-full glass hover:bg-[var(--surface-bg)] hover:text-[var(--text-heading)] hover:border-orange-500/25 transition-all duration-300 hover:scale-105"
+              >
+                Contact Me
+              </a>
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* Right: Profile image */}
+          <motion.div
+            initial={isSSR ? false : { opacity: 0, scale: 0.85, rotate: -3 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden lg:flex flex-shrink-0 mt-12"
+          >
+            <div className="relative">
+              {/* Glow behind image */}
+              <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-orange-500/20 via-pink-500/15 to-purple-500/20 blur-2xl" />
+
+              {/* Gradient border frame */}
+              <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-500 opacity-50" />
+
+              {/* Image container */}
+              <div className="relative w-72 h-[22rem] xl:w-80 xl:h-[25rem] rounded-3xl overflow-hidden">
+                <img
+                  src="/profile.jpg"
+                  alt="Joshwa"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: '60% 15%' }}
+                />
+                {/* Subtle overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              </div>
+
+              {/* Decorative orbiting dots */}
+              <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full border border-orange-500/40 bg-orange-500/10 backdrop-blur-sm" />
+              <div className="absolute -bottom-3 -left-3 w-4 h-4 rounded-full border border-pink-500/40 bg-pink-500/10 backdrop-blur-sm" />
+              <div className="absolute top-1/2 -right-5 w-3 h-3 rounded-full bg-purple-500/30" />
+            </div>
+          </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={isSSR ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 scroll-indicator"
+        >
+          <span className="text-[10px] text-[var(--text-muted)] tracking-[0.3em] uppercase font-mono">Scroll</span>
+          <div className="w-[1px] h-8 bg-gradient-to-b from-orange-500/50 to-transparent" />
+        </motion.div>
       </div>
     </section>
   )
